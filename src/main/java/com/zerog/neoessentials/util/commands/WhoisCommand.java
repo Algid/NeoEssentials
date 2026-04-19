@@ -191,7 +191,7 @@ public class WhoisCommand {
         }
         
         // Player not found
-        source.sendFailure(Component.translatable("commands.neoessentials.whois.player_not_found", playerName));
+        source.sendFailure(MessageUtil.error("commands.neoessentials.whois.player_not_found", playerName));
         return 0;
     }
 
