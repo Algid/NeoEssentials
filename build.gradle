@@ -167,6 +167,9 @@ dependencies {
     compileOnly 'curse.maven:architectury-api-419699:5786327'
     compileOnly 'curse.maven:ftb-ranks-314905:6522073'
 
+    // SG-Economy (required at runtime, loaded separately as its own mod JAR)
+    compileOnly 'curse.maven:sg-economy-1446971:7541709'
+
     // Alternative: if you want them available during testing, use runtimeOnly
     // runtimeOnly fg.deobf("dev.architectury:architectury-neoforge:VERSION")
     // runtimeOnly fg.deobf("dev.ftb.mods:ftb-library-neoforge:VERSION")

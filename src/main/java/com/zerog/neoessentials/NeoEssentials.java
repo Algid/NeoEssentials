@@ -209,6 +209,7 @@ public class NeoEssentials {
             try {
                 LOGGER.info("⚙ Initializing ChestShop system...");
                 com.zerog.neoessentials.shop.ShopManager.getInstance().initialize();
+                com.zerog.neoessentials.shop.ShopPendingPayments.getInstance().initialize();
                 LOGGER.info("✓ ChestShop system initialized ({} shop(s) loaded)",
                     com.zerog.neoessentials.shop.ShopManager.getInstance().getShopCount());
             } catch (Exception e) {
@@ -320,6 +321,10 @@ public class NeoEssentials {
         
         @SubscribeEvent
         public static void onPlayerLoggedIn(net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent event) {
+            if (event.getEntity() instanceof net.minecraft.server.level.ServerPlayer player) {
+                com.zerog.neoessentials.shop.ShopPendingPayments.getInstance().drain(player);
+            }
+
             // Check if we should notify admins about config splitting
             if (ConfigSplitter.shouldNotifyAdmins() && event.getEntity() instanceof net.minecraft.server.level.ServerPlayer player) {
                 // Check if player has permission (OP or wildcard permission)
@@ -409,6 +414,7 @@ public class NeoEssentials {
             // Shutdown ChestShop system
             try {
                 com.zerog.neoessentials.shop.ShopManager.getInstance().shutdown();
+                com.zerog.neoessentials.shop.ShopPendingPayments.getInstance().shutdown();
             } catch (Exception e) {
                 LOGGER.error("Failed to shutdown ChestShop system", e);
             }
